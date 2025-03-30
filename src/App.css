@@ -1,13 +1,5 @@
 /* Container remains fixed */
-.ph-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: #f30a0a;
-  font-family: Arial, sans-serif;
-}
-
+ 
 /* Responsive calculator styles */
 .ph-calculator {
   width: 320px;
