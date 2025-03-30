@@ -1,7 +1,6 @@
 /* Container remains fixed */
 .ph-container {
   display: flex;
-  margin-left: 700px;
   justify-content: center;
   align-items: center;
   height: 100vh;
