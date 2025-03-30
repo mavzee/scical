@@ -1,23 +1,40 @@
-/* Calculator with fluid sizing */
+/* Base styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #121212;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 50px;
+}
+
+/* Calculator container */
 .ph-calculator {
   width: 100%;
   max-width: 420px;
   background-color: #1a1a1a;
-  border-radius: 10px;
-  padding: 15px;
-  box-shadow: 0 0 20px rgba(255, 102, 0, 0.3);
+  border-radius: 15px;
+  padding: 40px;
+  box-shadow: 0 0 30px rgba(255, 102, 0, 0.4);
   border: 1px solid #ff6600;
-  margin: 0 auto;
 }
 
+/* Display area */
 .ph-display {
   background-color: #000000;
-  padding: 12px;
-  border-radius: 5px;
-  margin-bottom: 12px;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
   text-align: right;
   color: #ff6600;
-  min-height: 70px;
+  min-height: 90px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -27,50 +44,63 @@
 }
 
 .ph-prev {
-  font-size: 0.9rem;
+  font-size: 1rem;
   color: rgba(255, 102, 0, 0.7);
-  line-height: 1.2;
+  line-height: 1.3;
+  min-height: 20px;
 }
 
 .ph-current {
-  font-size: 1.5rem;
+  font-size: 2rem;
   line-height: 1.2;
   color: #ff6600;
 }
 
+/* Angle mode toggle */
 .ph-angle-toggle {
-  margin-bottom: 8px;
+  margin-bottom: 15px;
 }
 
 .ph-angle-btn {
   width: 100%;
-  padding: 8px;
+  padding: 10px;
   background-color: #ff6600;
   color: #000000;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   font-weight: bold;
-  font-size: 0.9rem;
+  font-size: 1rem;
+  transition: all 0.2s;
 }
 
+.ph-angle-btn:hover {
+  background-color: #ff8533;
+}
+
+.ph-angle-btn:active {
+  transform: scale(0.95);
+}
+
+/* Button grid */
 .ph-buttons {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 6px;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
 }
 
+/* Button styles */
 .ph-num-btn, .ph-op-btn, .ph-func-btn, .ph-equals-btn {
-  padding: 12px 5px;
-  font-size: 1rem;
+  padding: 15px 5px;
+  font-size: 1.2rem;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   cursor: pointer;
   transition: all 0.2s;
-  aspect-ratio: 1/1;
   display: flex;
   align-items: center;
   justify-content: center;
+  aspect-ratio: 1/1;
 }
 
 .ph-num-btn {
@@ -121,60 +151,32 @@ button:active {
 }
 
 /* Responsive adjustments */
-@media (min-width: 768px) {
-  .ph-calculator {
-    padding: 20px;
-    max-width: 500px;
-  }
-  
-  .ph-display {
-    min-height: 90px;
-    padding: 15px;
-  }
-  
-  .ph-current {
-    font-size: 2rem;
-  }
-  
-  .ph-prev {
-    font-size: 1.1rem;
-  }
-  
-  .ph-buttons {
-    gap: 10px;
-  }
-  
-  .ph-num-btn, .ph-op-btn, .ph-func-btn, .ph-equals-btn {
-    padding: 15px 10px;
-    font-size: 1.2rem;
-  }
-}
-
 @media (max-width: 480px) {
   .ph-calculator {
     max-width: 350px;
+    padding: 15px;
   }
   
   .ph-display {
-    min-height: 60px;
-    padding: 10px;
+    padding: 15px;
+    min-height: 80px;
   }
   
   .ph-current {
-    font-size: 1.3rem;
+    font-size: 1.8rem;
   }
   
   .ph-prev {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
   }
   
   .ph-buttons {
-    gap: 5px;
+    gap: 8px;
   }
   
   .ph-num-btn, .ph-op-btn, .ph-func-btn, .ph-equals-btn {
-    padding: 10px 3px;
-    font-size: 0.9rem;
+    padding: 12px 5px;
+    font-size: 1.1rem;
   }
 }
 
@@ -185,24 +187,29 @@ button:active {
   }
   
   .ph-display {
-    min-height: 50px;
+    padding: 10px;
+    min-height: 70px;
   }
   
   .ph-current {
-    font-size: 1.1rem;
+    font-size: 1.5rem;
   }
   
   .ph-prev {
-    font-size: 0.7rem;
+    font-size: 0.8rem;
+  }
+  
+  .ph-buttons {
+    gap: 6px;
   }
   
   .ph-num-btn, .ph-op-btn, .ph-func-btn, .ph-equals-btn {
-    padding: 8px 2px;
-    font-size: 0.8rem;
+    padding: 10px 3px;
+    font-size: 1rem;
   }
   
   .ph-angle-btn {
-    padding: 6px;
-    font-size: 0.8rem;
+    padding: 8px;
+    font-size: 0.9rem;
   }
 }

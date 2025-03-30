@@ -11,7 +11,7 @@ function App() {
       setInput(num);
     } else if (input === '-0' && num !== '.') {
       setInput('-' + num);
-    } else if (num === '.' && input.includes('.')) {
+    } else if (num === '.' && (input.includes('.') || /[+\-*/%^]/.test(input.slice(-1)))) {
       return;
     } else {
       setInput(input + num);
@@ -34,6 +34,8 @@ function App() {
       setInput(input === '0' ? Math.PI.toString() : input + Math.PI.toString());
     } else if (func === 'e') {
       setInput(input === '0' ? Math.E.toString() : input + Math.E.toString());
+    } else if (func === '√') {
+      setInput('√(' + (input === '0' ? '' : input) + ')');
     } else {
       setInput(func + '(' + (input === '0' ? '' : input) + ')');
     }
