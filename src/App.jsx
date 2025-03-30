@@ -1,33 +1,30 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import './App.css';
 
 function App() {
   const [input, setInput] = useState('0');
   const [prevInput, setPrevInput] = useState('');
   const [isRadians, setIsRadians] = useState(true);
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
 
   const handleNumber = (num) => {
     if (input === '0' && num !== '.') {
       setInput(num);
     } else if (input === '-0' && num !== '.') {
       setInput('-' + num);
+    } else if (num === '.' && input.includes('.')) {
+      return;
     } else {
       setInput(input + num);
     }
   };
 
   const handleOperator = (op) => {
-    if (input.slice(-1) === op) return;
-    setInput(input + op);
+    const lastChar = input.slice(-1);
+    if (/[+\-*/%^]/.test(lastChar)) {
+      setInput(input.slice(0, -1) + op);
+    } else {
+      setInput(input + op);
+    }
   };
 
   const handleFunction = (func) => {
@@ -92,58 +89,56 @@ function App() {
   };
 
   return (
-    <div className={`ph-container ${isMobile ? 'mobile' : ''}`}>
-      <div className="ph-calculator">
-        <div className="ph-display">
-          <div className="ph-prev">{prevInput}</div>
-          <div className="ph-current">{input}</div>
-        </div>
+    <div className="ph-calculator">
+      <div className="ph-display">
+        <div className="ph-prev">{prevInput}</div>
+        <div className="ph-current">{input}</div>
+      </div>
+      
+      <div className="ph-angle-toggle">
+        <button className="ph-angle-btn" onClick={toggleAngleMode}>
+          {isRadians ? 'RAD' : 'DEG'}
+        </button>
+      </div>
+      
+      <div className="ph-buttons">
+        <button className="ph-func-btn" onClick={clearAll}>AC</button>
+        <button className="ph-func-btn" onClick={backspace}>⌫</button>
+        <button className="ph-func-btn" onClick={() => handleFunction('√')}>√</button>
+        <button className="ph-func-btn" onClick={() => handleOperator('^')}>^</button>
+        <button className="ph-func-btn" onClick={() => handleOperator('(')}>(</button>
         
-        <div className="ph-angle-toggle">
-          <button className="ph-angle-btn" onClick={toggleAngleMode}>
-            {isRadians ? 'RAD' : 'DEG'}
-          </button>
-        </div>
+        <button className="ph-func-btn" onClick={() => handleFunction('sin')}>sin</button>
+        <button className="ph-func-btn" onClick={() => handleFunction('cos')}>cos</button>
+        <button className="ph-func-btn" onClick={() => handleFunction('tan')}>tan</button>
+        <button className="ph-func-btn" onClick={() => handleOperator(')')}>)</button>
+        <button className="ph-op-btn" onClick={() => handleOperator('/')}>÷</button>
         
-        <div className="ph-buttons">
-          <button className="ph-func-btn" onClick={clearAll}>AC</button>
-          <button className="ph-func-btn" onClick={backspace}>⌫</button>
-          <button className="ph-func-btn" onClick={() => handleFunction('√')}>√</button>
-          <button className="ph-func-btn" onClick={() => handleOperator('^')}>^</button>
-          <button className="ph-func-btn" onClick={() => handleOperator('(')}>(</button>
-          
-          <button className="ph-func-btn" onClick={() => handleFunction('sin')}>sin</button>
-          <button className="ph-func-btn" onClick={() => handleFunction('cos')}>cos</button>
-          <button className="ph-func-btn" onClick={() => handleFunction('tan')}>tan</button>
-          <button className="ph-func-btn" onClick={() => handleOperator(')')}>)</button>
-          <button className="ph-op-btn" onClick={() => handleOperator('/')}>÷</button>
-          
-          <button className="ph-func-btn" onClick={() => handleFunction('log')}>log</button>
-          <button className="ph-func-btn" onClick={() => handleFunction('ln')}>ln</button>
-          <button className="ph-func-btn" onClick={() => handleFunction('π')}>π</button>
-          <button className="ph-func-btn" onClick={() => handleFunction('e')}>e</button>
-          <button className="ph-op-btn" onClick={() => handleOperator('*')}>×</button>
-          
-          <button className="ph-num-btn" onClick={() => handleNumber('7')}>7</button>
-          <button className="ph-num-btn" onClick={() => handleNumber('8')}>8</button>
-          <button className="ph-num-btn" onClick={() => handleNumber('9')}>9</button>
-          <button className="ph-func-btn" onClick={() => handleFunction('±')}>±</button>
-          <button className="ph-op-btn" onClick={() => handleOperator('-')}>-</button>
-          
-          <button className="ph-num-btn" onClick={() => handleNumber('4')}>4</button>
-          <button className="ph-num-btn" onClick={() => handleNumber('5')}>5</button>
-          <button className="ph-num-btn" onClick={() => handleNumber('6')}>6</button>
-          <button className="ph-num-btn" onClick={() => handleNumber('.')}>.</button>
-          <button className="ph-op-btn" onClick={() => handleOperator('+')}>+</button>
-          
-          <button className="ph-num-btn" onClick={() => handleNumber('1')}>1</button>
-          <button className="ph-num-btn" onClick={() => handleNumber('2')}>2</button>
-          <button className="ph-num-btn" onClick={() => handleNumber('3')}>3</button>
-          <button className="ph-equals-btn span-2" onClick={calculate}>=</button>
-          
-          <button className="ph-num-btn span-2" onClick={() => handleNumber('0')}>0</button>
-          <button className="ph-op-btn" onClick={() => handleOperator('%')}>%</button>
-        </div>
+        <button className="ph-func-btn" onClick={() => handleFunction('log')}>log</button>
+        <button className="ph-func-btn" onClick={() => handleFunction('ln')}>ln</button>
+        <button className="ph-func-btn" onClick={() => handleFunction('π')}>π</button>
+        <button className="ph-func-btn" onClick={() => handleFunction('e')}>e</button>
+        <button className="ph-op-btn" onClick={() => handleOperator('*')}>×</button>
+        
+        <button className="ph-num-btn" onClick={() => handleNumber('7')}>7</button>
+        <button className="ph-num-btn" onClick={() => handleNumber('8')}>8</button>
+        <button className="ph-num-btn" onClick={() => handleNumber('9')}>9</button>
+        <button className="ph-func-btn" onClick={() => handleFunction('±')}>±</button>
+        <button className="ph-op-btn" onClick={() => handleOperator('-')}>-</button>
+        
+        <button className="ph-num-btn" onClick={() => handleNumber('4')}>4</button>
+        <button className="ph-num-btn" onClick={() => handleNumber('5')}>5</button>
+        <button className="ph-num-btn" onClick={() => handleNumber('6')}>6</button>
+        <button className="ph-num-btn" onClick={() => handleNumber('.')}>.</button>
+        <button className="ph-op-btn" onClick={() => handleOperator('+')}>+</button>
+        
+        <button className="ph-num-btn" onClick={() => handleNumber('1')}>1</button>
+        <button className="ph-num-btn" onClick={() => handleNumber('2')}>2</button>
+        <button className="ph-num-btn" onClick={() => handleNumber('3')}>3</button>
+        <button className="ph-equals-btn span-2" onClick={calculate}>=</button>
+        
+        <button className="ph-num-btn span-2" onClick={() => handleNumber('0')}>0</button>
+        <button className="ph-op-btn" onClick={() => handleOperator('%')}>%</button>
       </div>
     </div>
   );

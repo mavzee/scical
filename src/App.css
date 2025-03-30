@@ -1,47 +1,45 @@
-/* Container remains fixed */
- 
-/* Responsive calculator styles */
+/* Calculator with fluid sizing */
 .ph-calculator {
-  width: 320px;
+  width: 100%;
+  max-width: 420px;
   background-color: #1a1a1a;
   border-radius: 10px;
-  padding: 20px;
+  padding: 15px;
   box-shadow: 0 0 20px rgba(255, 102, 0, 0.3);
   border: 1px solid #ff6600;
-  margin: 20px;
+  margin: 0 auto;
 }
 
 .ph-display {
   background-color: #000000;
-  padding: 15px;
+  padding: 12px;
   border-radius: 5px;
-  margin-bottom: 15px;
+  margin-bottom: 12px;
   text-align: right;
   color: #ff6600;
-  min-height: 80px;
+  min-height: 70px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   border: 1px solid #ff6600;
   overflow: hidden;
+  word-break: break-all;
 }
 
 .ph-prev {
-  font-size: 1rem;
+  font-size: 0.9rem;
   color: rgba(255, 102, 0, 0.7);
-  word-wrap: break-word;
-  overflow-wrap: break-word;
+  line-height: 1.2;
 }
 
 .ph-current {
-  font-size: clamp(1.5rem, 5vw, 2rem);
-  word-wrap: break-word;
-  overflow-wrap: break-word;
+  font-size: 1.5rem;
+  line-height: 1.2;
   color: #ff6600;
 }
 
 .ph-angle-toggle {
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
 .ph-angle-btn {
@@ -53,17 +51,18 @@
   border-radius: 5px;
   cursor: pointer;
   font-weight: bold;
+  font-size: 0.9rem;
 }
 
 .ph-buttons {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 8px;
+  gap: 6px;
 }
 
 .ph-num-btn, .ph-op-btn, .ph-func-btn, .ph-equals-btn {
-  padding: clamp(10px, 2vw, 15px);
-  font-size: clamp(0.9rem, 3vw, 1.2rem);
+  padding: 12px 5px;
+  font-size: 1rem;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -121,34 +120,89 @@ button:active {
   aspect-ratio: 2/1;
 }
 
-/* Responsive adjustments for calculator only */
-@media (max-width: 400px) {
+/* Responsive adjustments */
+@media (min-width: 768px) {
   .ph-calculator {
-    width: 90%;
-    max-width: 320px;
+    padding: 20px;
+    max-width: 500px;
+  }
+  
+  .ph-display {
+    min-height: 90px;
     padding: 15px;
   }
   
+  .ph-current {
+    font-size: 2rem;
+  }
+  
+  .ph-prev {
+    font-size: 1.1rem;
+  }
+  
   .ph-buttons {
-    gap: 6px;
+    gap: 10px;
+  }
+  
+  .ph-num-btn, .ph-op-btn, .ph-func-btn, .ph-equals-btn {
+    padding: 15px 10px;
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .ph-calculator {
+    max-width: 350px;
+  }
+  
+  .ph-display {
+    min-height: 60px;
+    padding: 10px;
+  }
+  
+  .ph-current {
+    font-size: 1.3rem;
+  }
+  
+  .ph-prev {
+    font-size: 0.8rem;
+  }
+  
+  .ph-buttons {
+    gap: 5px;
+  }
+  
+  .ph-num-btn, .ph-op-btn, .ph-func-btn, .ph-equals-btn {
+    padding: 10px 3px;
+    font-size: 0.9rem;
   }
 }
 
 @media (max-width: 350px) {
   .ph-calculator {
+    max-width: 280px;
     padding: 10px;
   }
   
   .ph-display {
-    min-height: 70px;
-    padding: 10px;
+    min-height: 50px;
   }
   
   .ph-current {
-    font-size: 1.5rem;
+    font-size: 1.1rem;
   }
   
   .ph-prev {
-    font-size: 0.9rem;
+    font-size: 0.7rem;
+  }
+  
+  .ph-num-btn, .ph-op-btn, .ph-func-btn, .ph-equals-btn {
+    padding: 8px 2px;
+    font-size: 0.8rem;
+  }
+  
+  .ph-angle-btn {
+    padding: 6px;
+    font-size: 0.8rem;
   }
 }
